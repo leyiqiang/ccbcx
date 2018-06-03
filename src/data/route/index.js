@@ -1,4 +1,4 @@
 export const ROOT = '/'
 
-export const LOGIN = '/login'
-export const REGISTER = '/register'
+export const SIGN_IN = '/signIn'
+export const SIGN_UP = '/signUp'
