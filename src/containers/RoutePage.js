@@ -7,13 +7,18 @@ import _ from 'lodash'
 import { ROOT, SIGN_IN, SIGN_UP }  from 'src/data/route'
 import HomePage from './HomePage'
 import SignInPage from './SignInPage'
+import SignUpPage from './SignUpPage'
+import InfoCard from 'src/components/InfoCard'
+import WithLoading from 'src/components/WithLoading'
 
 @withRouter
 @inject(stores => {
-  const { sessionStore } = stores
+  const { sessionStore, loadingStore } = stores
   const { userInfo } = sessionStore
+  const { isUserInfoLoading } = loadingStore
   return {
     userInfo,
+    isUserInfoLoading,
   }
 })
 @observer
@@ -25,16 +30,24 @@ class RoutePage extends Component {
 
   static propTypes =  {
     userInfo: PropTypes.object,
+    isUserInfoLoading: PropTypes.bool,
   }
 
   renderRoute() {
-    const { userInfo } = this.props
+    const { userInfo, isUserInfoLoading } = this.props
+    if(isUserInfoLoading) {
+      return (<h3>Loading...</h3>)
+    }
     if (_.isNil(userInfo)) {
       return(
-        <Switch>
-          <Route path={SIGN_IN} component={SignInPage} />
-          <Route path={'*'} component={() => <Redirect to={SIGN_IN}/> } />
-        </Switch>
+        <div>
+          <InfoCard/>
+          <Switch>
+            <Route path={SIGN_IN} component={SignInPage} />
+            <Route path={SIGN_UP} component={SignUpPage} />
+            <Route path={'*'} component={() => <Redirect to={SIGN_IN}/> } />
+          </Switch>
+        </div>
       )
     } else {
       return (

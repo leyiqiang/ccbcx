@@ -6,22 +6,28 @@ import PropTypes from 'prop-types'
 
 // @withRouter
 @observer
-class SignInForm extends Component {
+class SignUpForm extends Component {
   constructor(props) {
     super(props)
 
     this.onUserNameChange = this.onUserNameChange.bind(this)
+    this.onNickNameChange = this.onNickNameChange.bind(this)
     this.onPasswordChange = this.onPasswordChange.bind(this)
+    this.onConfirmPasswordChange = this.onConfirmPasswordChange.bind(this)
     this.renderErrorMessage = this.renderErrorMessage.bind(this)
-    this.onLogin = this.onLogin.bind(this)
+    this.onRegister = this.onRegister.bind(this)
   }
 
   static propTypes = {
     userName: PropTypes.string,
+    nickName: PropTypes.string,
     password: PropTypes.string,
+    confirmPassword: PropTypes.string,
     setUserName: PropTypes.func.isRequired,
+    setNickName: PropTypes.func.isRequired,
     setPassword: PropTypes.func.isRequired,
-    login: PropTypes.func.isRequired,
+    setConfirmPassword: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired,
     errorMessage: PropTypes.string,
   }
 
@@ -30,9 +36,19 @@ class SignInForm extends Component {
     this.props.setUserName(e.target.value)
   }
 
+  onNickNameChange(e) {
+    e.preventDefault()
+    this.props.setNickName(e.target.value)
+  }
+
   onPasswordChange(e) {
     e.preventDefault()
     this.props.setPassword(e.target.value)
+  }
+
+  onConfirmPasswordChange(e) {
+    e.preventDefault()
+    this.props.setConfirmPassword(e.target.value)
   }
 
   renderErrorMessage() {
@@ -47,15 +63,16 @@ class SignInForm extends Component {
     }
   }
 
-  onLogin(e) {
+  onRegister(e) {
     e.preventDefault()
-    this.props.login()
+    this.props.register()
   }
 
   render() {
+    const { userName, nickName, password, confirmPassword } = this.props
     return (
       <div>
-        <h3>请登陆</h3>
+        <h3>注册</h3>
         <Form>
           {this.renderErrorMessage()}
           <FormGroup>
@@ -63,22 +80,38 @@ class SignInForm extends Component {
             <Input
               type='text'
               name='userName'
-              value={this.props.userName}
+              value={userName}
               onChange={this.onUserNameChange}/>
+          </FormGroup>
+          <FormGroup>
+            <Label>NickName</Label>
+            <Input
+              type='text'
+              name='nickName'
+              value={nickName}
+              onChange={this.onNickNameChange}/>
           </FormGroup>
           <FormGroup>
             <Label for="examplePassword">密码</Label>
             <Input
               type="password"
               name="password"
-              value={this.props.password}
+              value={password}
               onChange={this.onPasswordChange}/>
           </FormGroup>
-          <Button onClick={this.onLogin}>登陆</Button>
+          <FormGroup>
+            <Label for="examplePassword">Confirm your password</Label>
+            <Input
+              type="password"
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={this.onConfirmPasswordChange}/>
+          </FormGroup>
+          <Button onClick={this.onRegister}>注册</Button>
         </Form>
       </div>
     )
   }
 }
 
-export default SignInForm
+export default SignUpForm

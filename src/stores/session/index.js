@@ -1,9 +1,9 @@
 import { action, observable } from 'mobx'
 import { getUserInfo } from 'src/api/session'
 import { setXAccessToken } from 'src/util'
-import routingStore from '../routing'
+import loadingStore from '../loading'
 
-class Session {
+class SessionStore {
   @observable userInfo = null
 
   constructor() {
@@ -17,15 +17,18 @@ class Session {
 
   @action async getUserInfo() {
     try {
+      loadingStore.isUserInfoLoading = true
       const res = await getUserInfo()
       self.userInfo = res.data
+      loadingStore.isUserInfoLoading = false
       return res.data
     } catch (err) {
       setXAccessToken(null)
     }
+    loadingStore.isUserInfoLoading = false
   }
 }
 
-const self = new Session()
+const self = new SessionStore()
 
 export default self
