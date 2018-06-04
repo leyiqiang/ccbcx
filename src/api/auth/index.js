@@ -1,8 +1,12 @@
 import { axios } from 'src/api/axios'
 
 const AUTH_API = '/api/auth'
-const USER_INFO = AUTH_API + '/info'
 
-export const getUserInfo = async function() {
-  return await axios.get(USER_INFO)
+const SIGN_IN = AUTH_API + '/signIn'
+
+export const signIn = async function({ userName, password }) {
+  return await axios.post(SIGN_IN, {
+    userName,
+    password,
+  })
 }

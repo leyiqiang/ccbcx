@@ -1,6 +1,7 @@
 import { action, observable } from 'mobx'
-import { getUserInfo } from 'src/api/auth'
+import { getUserInfo } from 'src/api/session'
 import { setXAccessToken } from 'src/util'
+import routingStore from '../routing'
 
 class Session {
   @observable userInfo = null
@@ -16,7 +17,7 @@ class Session {
 
   @action async getUserInfo() {
     try {
-      const res = getUserInfo()
+      const res = await getUserInfo()
       self.userInfo = res.data
       return res.data
     } catch (err) {
