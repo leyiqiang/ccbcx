@@ -10,6 +10,7 @@ import SignInPage from './SignInPage'
 import SignUpPage from './SignUpPage'
 import InfoCard from 'src/components/InfoCard'
 import WithLoading from 'src/components/WithLoading'
+import NavBar from '../components/NavBar';
 
 @withRouter
 @inject(stores => {
@@ -51,10 +52,13 @@ class RoutePage extends Component {
       )
     } else {
       return (
-        <Switch>
-          <Route exact path={ROOT} component={HomePage}/>
-          <Route path={'*'} component={() => <Redirect to={ROOT}/> } />
-        </Switch>
+        <div>
+          <NavBar/>
+          <Switch>
+            <Route exact path={ROOT} component={HomePage}/>
+            <Route path={'*'} component={() => <Redirect to={ROOT}/> } />
+          </Switch>
+        </div>
       )
     }
   }
