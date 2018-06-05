@@ -11,6 +11,7 @@ import SignUpPage from './SignUpPage'
 import InfoCard from 'src/components/InfoCard'
 import NavBar from '../components/NavBar'
 import UserRoutePage from './user/UserRoutePage'
+import Footer from '../components/Footer'
 
 @withRouter
 @inject(stores => {
@@ -50,6 +51,7 @@ class RoutePage extends Component {
             <Route path={SIGN_UP} component={SignUpPage} />
             <Route path={'*'} component={() => <Redirect to={SIGN_IN}/> } />
           </Switch>
+          <Footer/>
         </div>
       )
     } else {
@@ -61,6 +63,7 @@ class RoutePage extends Component {
             <Route path={USER} component={UserRoutePage} />
             <Route path={'*'} component={() => <Redirect to={ROOT}/> } />
           </Switch>
+          <Footer/>
         </div>
       )
     }
