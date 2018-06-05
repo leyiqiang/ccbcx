@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { observer } from 'mobx-react'
+import { observer, PropTypes as MobxPropTypes } from 'mobx-react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 
@@ -7,18 +7,23 @@ import _ from 'lodash'
 class GroupProfile extends Component {
   constructor(props) {
     super(props)
-    this.onCreateTeam = this.onCreateTeam.bind(this)
   }
 
   static propTypes = {
     groupName: PropTypes.string,
+    groupContact: PropTypes.string,
+    memberList: MobxPropTypes.observableArray,
+    invitationCode: PropTypes.string,
   }
 
   render() {
-    const { groupName } = this.props
+    const { groupName, groupContact, memberList, invitationCode } = this.props
     return (
       <div>
         <p>队名: {groupName}</p>
+        <p>Contact Info: {groupContact}</p>
+        <p>Members: {_.join(memberList, ', ')}</p>
+        {invitationCode && <p>Invitation Code: {invitationCode}</p>}
       </div>
     )
   }

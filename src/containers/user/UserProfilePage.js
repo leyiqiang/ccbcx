@@ -1,30 +1,37 @@
 import React, { Component } from 'react'
-import { observer, inject } from 'mobx-react'
+import { observer, inject, PropTypes as MobxPropTypes } from 'mobx-react'
 import PropTypes from 'prop-types'
 import { Jumbotron } from 'reactstrap'
 import _ from 'lodash'
 import UserProfile from 'src/components/user/UserProfile'
 import GroupProfile from 'src/components/user/GroupProfile'
 import GroupSubmitForm from 'src/components/user/GroupSubmitForm'
+import {joinGroup} from '../../api/group';
 
 @inject(stores => {
-  const { sessionStore, userStore, loadingStore } = stores
+  const { sessionStore, groupStore, loadingStore } = stores
   const { userInfo } = sessionStore
   const {
     createGroup,
+    joinGroup,
+    getGroupInfo,
     groupName,
     groupContact,
-    setGroupName,
-    setGroupContact,
-  } = userStore
+    memberList,
+    invitationCode,
+    errorMessage: groupErrorMessage,
+  } = groupStore
   // const { isUserProfileLoading } = loadingStore
   return {
     userInfo,
     groupName,
+    getGroupInfo,
     groupContact,
+    memberList,
+    invitationCode,
     createGroup,
-    setGroupName,
-    setGroupContact,
+    joinGroup,
+    groupErrorMessage,
   }
 })
 @observer
@@ -37,34 +44,44 @@ class UserProfilePage extends Component {
   static propTypes = {
     userInfo: PropTypes.object.isRequired,
     createGroup: PropTypes.func.isRequired,
-    groupName: PropTypes.string.isRequired,
-    groupContact: PropTypes.string.isRequired,
-    setGroupName: PropTypes.func.isRequired,
-    setGroupContact: PropTypes.func.isRequired,
+    joinGroup: PropTypes.func.isRequired,
+    getGroupInfo: PropTypes.func.isRequired,
+    groupName: PropTypes.string,
+    groupContact: PropTypes.string,
+    memberList: MobxPropTypes.observableArray,
+    invitationCode: PropTypes.string,
+    groupErrorMessage: PropTypes.string,
   }
 
+  componentWillMount() {
+    this.props.getGroupInfo()
+  }
   renderGroupProfile() {
     const {
-      userInfo,
       createGroup,
+      joinGroup,
       groupName,
       groupContact,
-      setGroupName,
-      setGroupContact,
+      memberList,
+      invitationCode,
+      groupErrorMessage,
     } = this.props
-    const { groupName: userGroupName } = userInfo
-    if (_.isNil(userGroupName)) {
+    if (_.isNil(groupName)) {
       return (
         <GroupSubmitForm
-          groupName={groupName}
-          groupContact={groupContact}
           createGroup={createGroup}
-          setGroupName={setGroupName}
-          setGroupContact={setGroupContact}
+          joinGroup={joinGroup}
+          errorMessage={groupErrorMessage}
         />)
     }
 
-    return <GroupProfile groupName={userGroupName}/>
+    return (
+      <GroupProfile
+        groupName={groupName}
+        groupContact={groupContact}
+        memberList={memberList}
+        invitationCode={invitationCode}
+      />)
   }
 
   render() {
