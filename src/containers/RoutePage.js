@@ -4,21 +4,22 @@ import { withRouter } from 'react-router'
 import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import { ROOT, SIGN_IN, SIGN_UP }  from 'src/data/route'
+import { ROOT, SIGN_IN, SIGN_UP, USER }  from 'src/data/route'
 import HomePage from './HomePage'
 import SignInPage from './SignInPage'
 import SignUpPage from './SignUpPage'
 import InfoCard from 'src/components/InfoCard'
-import WithLoading from 'src/components/WithLoading'
-import NavBar from '../components/NavBar';
+import NavBar from '../components/NavBar'
+import UserRoutePage from './user/UserRoutePage'
 
 @withRouter
 @inject(stores => {
   const { sessionStore, loadingStore } = stores
-  const { userInfo } = sessionStore
+  const { userInfo, logout } = sessionStore
   const { isUserInfoLoading } = loadingStore
   return {
     userInfo,
+    logout,
     isUserInfoLoading,
   }
 })
@@ -31,11 +32,12 @@ class RoutePage extends Component {
 
   static propTypes =  {
     userInfo: PropTypes.object,
-    isUserInfoLoading: PropTypes.bool,
+    logout: PropTypes.func.isRequired,
+    isUserInfoLoading: PropTypes.bool.isRequired,
   }
 
   renderRoute() {
-    const { userInfo, isUserInfoLoading } = this.props
+    const { userInfo, logout, isUserInfoLoading } = this.props
     if(isUserInfoLoading) {
       return (<h3>Loading...</h3>)
     }
@@ -53,9 +55,10 @@ class RoutePage extends Component {
     } else {
       return (
         <div>
-          <NavBar/>
+          <NavBar logout={logout}/>
           <Switch>
-            <Route exact path={ROOT} component={HomePage}/>
+            <Route exact path={ROOT} component={HomePage} />
+            <Route path={USER} component={UserRoutePage} />
             <Route path={'*'} component={() => <Redirect to={ROOT}/> } />
           </Switch>
         </div>

@@ -1,5 +1,5 @@
 import { action, observable } from 'mobx'
-import { setXAccessToken } from 'src/util'
+import { setXAccessToken, getErrorMessage } from 'src/util'
 import { signIn } from 'src/api/auth'
 import sessionStore from 'src/stores/session'
 
@@ -33,8 +33,7 @@ class AuthStore {
       self.userName = ''
       self.password = ''
     } catch (err) {
-      self.errorMessage = err.message
-
+      self.errorMessage = getErrorMessage(err)
     }
   }
 }

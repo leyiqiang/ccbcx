@@ -21,7 +21,6 @@ class SessionStore {
       const res = await getUserInfo()
       self.userInfo = res.data
       loadingStore.isUserInfoLoading = false
-      return res.data
     } catch (err) {
       setXAccessToken(null)
     }

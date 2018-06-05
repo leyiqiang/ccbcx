@@ -84,7 +84,7 @@ class SignUpForm extends Component {
               onChange={this.onUserNameChange}/>
           </FormGroup>
           <FormGroup>
-            <Label>NickName</Label>
+            <Label>昵称</Label>
             <Input
               type='text'
               name='nickName'
@@ -100,7 +100,7 @@ class SignUpForm extends Component {
               onChange={this.onPasswordChange}/>
           </FormGroup>
           <FormGroup>
-            <Label for="examplePassword">Confirm your password</Label>
+            <Label for="examplePassword">确认密码</Label>
             <Input
               type="password"
               name="confirmPassword"

@@ -21,3 +21,15 @@ export const setXAccessToken = (token) => {
 
   changeAxiosInstanceXAccessTokenHeader(token)
 }
+
+export const getErrorMessage = (err) => {
+  if (!_.isNil(err.response)) {
+    return err.response.data.message
+  } else {
+    return err.message
+  }
+}
+
+export const buildParamURI = function({ originalURI, paramName, substitutedValue }) {
+  return _.replace(originalURI, paramName, substitutedValue)
+}

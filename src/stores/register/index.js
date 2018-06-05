@@ -1,5 +1,5 @@
 import { action, observable } from 'mobx'
-import { setXAccessToken } from 'src/util'
+import { setXAccessToken, getErrorMessage } from 'src/util'
 import { signUp } from 'src/api/auth'
 import sessionStore from '../session'
 import _ from 'lodash'
@@ -50,7 +50,7 @@ class RegisterStore {
         self.resetForm()
         await sessionStore.getUserInfo()
       } catch (err) {
-        self.setErrorMessage(err)
+        self.errorMessage = getErrorMessage(err)
       }
     }
   }
@@ -62,31 +62,22 @@ class RegisterStore {
         self.userName.length >30 ||
         !self.userName.match(regex)
     ) {
-      self.errorMessage = 'Invalid username'
+      self.errorMessage = '非法用户名, 请使用仅包含英文,数字的用户名(长度3-30字符)'
       return false
     }
-    // if (self.nickName.length < 3 || self.nickName.length >30) {
-    //   self.errorMessage = 'Invalid nickname'
-    //   return false
-    // }
+    if (self.nickName.length < 3 || self.nickName.length >30) {
+      self.errorMessage = '非法昵称(长度3-30字符)'
+      return false
+    }
     if (self.password.length <= 0) {
-      self.errorMessage = 'Password cannot be empty'
+      self.errorMessage = '密码不能为空'
       return false
     }
     if (self.password !== self.confirmPassword) {
-      self.errorMessage = 'Password does not match'
+      self.errorMessage = '密码不匹配'
       return false
     }
     return true
-  }
-
-  @action setErrorMessage(err) {
-    self.errorMessage = null
-    if (!_.isNil(err.response)) {
-      self.errorMessage = err.response.data.message
-    } else {
-      self.errorMessage = err.message
-    }
   }
 }
 

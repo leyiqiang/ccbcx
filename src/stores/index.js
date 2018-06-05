@@ -3,6 +3,7 @@ import authStore from './auth'
 import sessionStore from './session'
 import registerStore from './register'
 import loadingStore from './loading'
+import userStore from './user'
 
 const stores = {
   routingStore,
@@ -10,6 +11,7 @@ const stores = {
   sessionStore,
   registerStore,
   loadingStore,
+  userStore,
 }
 
 export default stores
