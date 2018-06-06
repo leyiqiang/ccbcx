@@ -65,8 +65,8 @@ class RegisterStore {
       self.errorMessage = '非法用户名, 请使用仅包含英文,数字的用户名(长度3-30字符)'
       return false
     }
-    if (self.nickName.length < 3 || self.nickName.length >30) {
-      self.errorMessage = '非法昵称(长度3-30字符)'
+    if (self.nickName.length < 1 || self.nickName.length >30) {
+      self.errorMessage = '非法昵称(长度1-30字符)'
       return false
     }
     if (self.password.length <= 0) {

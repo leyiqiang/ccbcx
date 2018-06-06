@@ -7,19 +7,11 @@ import {
   NavbarBrand,
   Nav } from 'reactstrap'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
-import { ROOT, USER } from 'src/data/route/index'
-import _ from 'lodash'
+import { ROOT, USER, GROUP } from 'src/data/route/index'
+// import _ from 'lodash'
 
-
-@inject(stores => {
-  const { sessionStore } = stores
-  const { userInfo } = sessionStore
-
-  return {
-    userInfo,
-  }
-})
 @observer
 class NavBar extends Component {
 
@@ -30,6 +22,10 @@ class NavBar extends Component {
     this.state = {
       isOpen: false,
     }
+  }
+  static propTypes = {
+    logout: PropTypes.func.isRequired,
+    nickName: PropTypes.string.isRequired,
   }
 
   onSignOut() {
@@ -47,6 +43,9 @@ class NavBar extends Component {
       <div>
         <Navbar color="light" light expand="md">
           <NavbarBrand>CCBCX</NavbarBrand>
+          <Nav>
+            你好, {this.props.nickName}
+          </Nav>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav navbar>
@@ -60,8 +59,13 @@ class NavBar extends Component {
               </Link>
             </Nav>
             <Nav navbar>
-              <Link to={USER}>
+              <Link to={GROUP}>
                 <Button>我的队伍</Button>
+              </Link>
+            </Nav>
+            <Nav navbar>
+              <Link to={USER}>
+                <Button>个人信息</Button>
               </Link>
             </Nav>
           </Collapse>

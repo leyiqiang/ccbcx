@@ -1,6 +1,11 @@
 import { action, observable } from 'mobx'
 import { getErrorMessage } from 'src/util/index'
-import { createGroup, getGroupInfo, joinGroup } from 'src/api/group'
+import {
+  createGroup,
+  getGroupInfo,
+  joinGroup,
+  leaveGroup,
+  deleteGroup } from 'src/api/group'
 import _ from 'lodash'
 
 class GroupStore {
@@ -69,14 +74,37 @@ class GroupStore {
     }
   }
 
+  @action async leaveGroup() {
+    self.errorMessage = null
+    try {
+      await leaveGroup()
+      await self.getGroupInfo()
+    } catch (err) {
+      self.clearGroupInfo()
+      self.errorMessage = getErrorMessage(err)
+    }
+  }
+
+  @action async deleteGroup({ groupName }) {
+    self.errorMessage = null
+    try {
+      await deleteGroup({ groupName })
+      await self.getGroupInfo()
+    } catch(err) {
+      self.clearGroupInfo()
+      self.errorMessage = getErrorMessage(err)
+    }
+
+  }
+
 
   @action validate({ groupName, groupContact }) {
     if (groupName.length < 1 || groupName.length > 30) {
-      self.errorMessage = 'Invalid group name (length 1-30)'
+      self.errorMessage = '非法队伍名 (长度 1-30)'
       return false
     }
     if (groupContact.length < 1 || groupContact.length > 30) {
-      self.errorMessage = 'Invalid contact info(length 1-30)'
+      self.errorMessage = '非法联系方式(长度 1-30)'
       return false
     }
     return true

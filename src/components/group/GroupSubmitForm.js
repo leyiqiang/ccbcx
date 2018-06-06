@@ -13,7 +13,6 @@ class GroupSubmitForm extends Component {
     this.onGroupContactChange = this.onGroupContactChange.bind(this)
     this.onGroupNameChange = this.onGroupNameChange.bind(this)
     this.onInvitationCodeChange = this.onInvitationCodeChange.bind(this)
-    this.renderErrorMessage = this.renderErrorMessage.bind(this)
     this.state = {
       groupName: '',
       groupContact: '',
@@ -26,7 +25,6 @@ class GroupSubmitForm extends Component {
     groupContact: PropTypes.string,
     createGroup: PropTypes.func.isRequired,
     joinGroup: PropTypes.func.isRequired,
-    errorMessage: PropTypes.string,
   }
 
   onGroupContactChange(e) {
@@ -68,24 +66,10 @@ class GroupSubmitForm extends Component {
     })
   }
 
-  renderErrorMessage() {
-    if (_.isNil(this.props.errorMessage)) {
-      return
-    } else {
-      return (
-        <div className='alert alert-danger' role='alert'>
-          {this.props.errorMessage}
-        </div>
-      )
-    }
-  }
-
-
   render() {
     return (
       <div>
         <p>您还没有队伍</p>
-        {this.renderErrorMessage()}
         <Form onSubmit={this.onJoinTeam}>
           <FormGroup>
             <Input
