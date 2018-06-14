@@ -19,7 +19,7 @@ class QuestionDetails extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      answer: this.props.answer,
+      answer: '',
       questionContent: this.props.questionContent,
     }
     this.onQuestionAnswerChange = this.onQuestionAnswerChange.bind(this)
@@ -28,7 +28,6 @@ class QuestionDetails extends Component {
 
   static propTypes = {
     questionNumber: PropTypes.string,
-    answer: PropTypes.string,
     questionContent: PropTypes.string,
     redirectToQuestionList: PropTypes.func.isRequired,
   }
