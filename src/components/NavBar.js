@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
 import { ROOT, USER, GROUP } from 'src/data/route/index'
+import {QUESTION} from '../data/route/index';
 // import _ from 'lodash'
 
 @observer
@@ -49,7 +50,7 @@ class NavBar extends Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav navbar>
-              <Link to={ROOT}>
+              <Link to={QUESTION}>
                 <Button>题目</Button>
               </Link>
             </Nav>

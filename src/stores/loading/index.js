@@ -5,7 +5,9 @@ import { action, observable } from 'mobx'
 
 class LoadingStore {
   @observable isUserInfoLoading = true;
-
+  @observable isQuestionGroupLoading = true;
+  @observable isQuestionListLoading = true;
+  @observable isQuestionInfoLoading = true;
   constructor () {
   }
 }

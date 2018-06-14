@@ -8,10 +8,10 @@ const WithLoading = (Component) => {
     }
     return (<h3>Loading...</h3>)
   }
-  WithLoadingComponent(Component)
   WithLoadingComponent.propTypes = {
     isLoading: PropTypes.bool,
   }
+  return WithLoadingComponent
 }
 
 export default WithLoading
