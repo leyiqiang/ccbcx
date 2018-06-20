@@ -13,6 +13,7 @@ import QuestionDetails from '../../components/question/QuestionDetails'
   const {
     getQuestion,
     question,
+    progress,
     errorMessage,
     successMessage,
     redirectToQuestionList,
@@ -22,6 +23,7 @@ import QuestionDetails from '../../components/question/QuestionDetails'
   return {
     getQuestion,
     question,
+    progress,
     errorMessage,
     successMessage,
     submitAnswer,
@@ -38,6 +40,7 @@ class QuestionDetailsPage extends Component {
   static propTypes = {
     match: PropTypes.object,
     errorMessage: PropTypes.string,
+    progress: PropTypes.object,
     successMessage: PropTypes.string,
     question: PropTypes.object,
     getQuestion: PropTypes.func.isRequired,
@@ -57,6 +60,7 @@ class QuestionDetailsPage extends Component {
       isQuestionInfoLoading,
       redirectToQuestionList,
       errorMessage,
+      progress,
       successMessage,
       submitAnswer,
     } = this.props
@@ -71,6 +75,7 @@ class QuestionDetailsPage extends Component {
           isLoading={isQuestionInfoLoading}
           redirectToQuestionList={redirectToQuestionList}
           submitAnswer={submitAnswer}
+          progress={progress}
           {...question}
         />
       </div>

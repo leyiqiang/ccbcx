@@ -1,7 +1,7 @@
 import { observable, action } from 'mobx'
 import loadingStore from '../loading'
 import {getErrorMessage} from 'src/util'
-import {getQuestion, submitAnswer} from 'src/api/question'
+import {getQuestion, submitAnswer, getProgress} from 'src/api/question'
 import routing from '../routing'
 import _ from 'lodash'
 import { QUESTION_LIST} from '../../data/route'
@@ -11,6 +11,7 @@ class QuestionStore {
   @observable errorMessage = null
   @observable question = null
   @observable successMessage = null
+  @observable progress = null
 
   constructor () {
   }
@@ -23,7 +24,7 @@ class QuestionStore {
     try {
       const res = await getQuestion({ questionNumber })
       self.question = res.data
-
+      await self.getProgress({ questionNumber })
     } catch (err) {
       self.errorMessage = getErrorMessage(err)
       self.successMessage = null
@@ -36,6 +37,18 @@ class QuestionStore {
     self.successMessage = null
     try {
       const res = await submitAnswer({ questionNumber, answer})
+      self.successMessage = res.data.message
+      self.getProgress({questionNumber})
+    } catch (err) {
+      self.errorMessage = getErrorMessage(err)
+      self.successMessage = null
+    }
+  }
+
+  @observable async getProgress({ questionNumber }) {
+    try {
+      const res = await getProgress({ questionNumber })
+      self.progress = res.data
     } catch (err) {
       self.errorMessage = getErrorMessage(err)
       self.successMessage = null

@@ -24,6 +24,7 @@ class QuestionDetails extends Component {
     }
     this.onQuestionAnswerChange = this.onQuestionAnswerChange.bind(this)
     this.onSubmitAnswer = this.onSubmitAnswer.bind(this)
+    this.renderProgress = this.renderProgress.bind(this)
     this.onCancel = this.onCancel.bind(this)
   }
 
@@ -32,6 +33,7 @@ class QuestionDetails extends Component {
     questionContent: PropTypes.string,
     redirectToQuestionList: PropTypes.func.isRequired,
     submitAnswer: PropTypes.func.isRequired,
+    progress: PropTypes.object,
   }
 
 
@@ -48,6 +50,21 @@ class QuestionDetails extends Component {
 
   onCancel() {
     this.props.redirectToQuestionList()
+  }
+
+  renderProgress() {
+    const {progress} = this.props
+    let completeString
+    if(!_.isNil(progress)) {
+      if(!_.isNil(progress.completeTime)) {
+        completeString = <p>You already completed this question</p>
+      }
+      const answerHistory = _.join(progress.answerHistory, ', ')
+      return(<div>
+        {completeString}
+        <p>answer history: {answerHistory}</p>
+      </div>)
+    }
   }
 
   render() {
@@ -68,6 +85,7 @@ class QuestionDetails extends Component {
           onChange={this.onQuestionAnswerChange}
           value={this.state.answer}
         />
+        {this.renderProgress()}
         <Button onClick={this.onSubmitAnswer}>提交</Button>
         <Button color='danger' onClick={this.onCancel}>返回</Button>
       </div>
