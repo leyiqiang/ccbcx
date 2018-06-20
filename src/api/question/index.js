@@ -9,6 +9,8 @@ const QUESTION_LIST = QUESTION_API + '/list'
 
 const QUESTION_INFO = QUESTION_API + '/' + PARAM_QUESTION_NUMBER
 
+const SUBMIT_ANSWER = QUESTION_API + '/answer'
+
 const getQuestionUri = function({ questionNumber }) {
   return buildParamURI({
     originalURI: QUESTION_INFO,
@@ -21,6 +23,9 @@ export const getQuestionList = async function() {
   return await axios.get(QUESTION_LIST)
 }
 
+export const submitAnswer = async function({questionNumber, answer}) {
+  return await axios.post(SUBMIT_ANSWER, { questionNumber, answer})
+}
 export const getQuestion = async function({ questionNumber }) {
   const uri = getQuestionUri({ questionNumber })
   return await axios.get(uri)

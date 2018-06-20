@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import QuestionGroupPage from './QuestionGroupPage'
+import QuestionGroupPage from './QuestionMapPage'
 import {QUESTION_DETAILS, QUESTION_LIST} from '../../data/route/index'
 import QuestionDetailsPage from './QuestionDetailsPage'
 

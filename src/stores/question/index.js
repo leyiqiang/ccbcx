@@ -1,7 +1,7 @@
 import { observable, action } from 'mobx'
 import loadingStore from '../loading'
 import {getErrorMessage} from 'src/util'
-import {getQuestion} from 'src/api/question'
+import {getQuestion, submitAnswer} from 'src/api/question'
 import routing from '../routing'
 import _ from 'lodash'
 import { QUESTION_LIST} from '../../data/route'
@@ -29,7 +29,17 @@ class QuestionStore {
       self.successMessage = null
     }
     loadingStore.isQuestionInfoLoading = false
+  }
 
+  @observable async submitAnswer({ questionNumber, answer}) {
+    self.errorMessage = null
+    self.successMessage = null
+    try {
+      const res = await submitAnswer({ questionNumber, answer})
+    } catch (err) {
+      self.errorMessage = getErrorMessage(err)
+      self.successMessage = null
+    }
   }
 
   @observable redirectToQuestionList() {

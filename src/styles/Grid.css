@@ -1,0 +1,17 @@
+.square {
+    float:left;
+    /*position: relative;*/
+    width: 12.5%;
+    padding-bottom : 8%; /* = width for a 1:1 aspect ratio */
+    /*text-align: center;*/
+    /*vertical-align: middle;*/
+    border: 1px solid black;
+}
+
+.grid-content {
+    position: relative;
+    top: 50%;
+    transform: translate(43%, 100%);
+    /*transform: translateY(70%);*/
+    /*transform: translateX(50%);*/
+}

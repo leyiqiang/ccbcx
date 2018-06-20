@@ -23,6 +23,7 @@ class QuestionDetails extends Component {
       questionContent: this.props.questionContent,
     }
     this.onQuestionAnswerChange = this.onQuestionAnswerChange.bind(this)
+    this.onSubmitAnswer = this.onSubmitAnswer.bind(this)
     this.onCancel = this.onCancel.bind(this)
   }
 
@@ -30,6 +31,7 @@ class QuestionDetails extends Component {
     questionNumber: PropTypes.string,
     questionContent: PropTypes.string,
     redirectToQuestionList: PropTypes.func.isRequired,
+    submitAnswer: PropTypes.func.isRequired,
   }
 
 
@@ -39,7 +41,10 @@ class QuestionDetails extends Component {
       answer: e.target.value,
     })
   }
-
+  onSubmitAnswer() {
+    const { submitAnswer, questionNumber } = this.props
+    submitAnswer({questionNumber, answer: this.state.answer})
+  }
 
   onCancel() {
     this.props.redirectToQuestionList()
@@ -63,7 +68,8 @@ class QuestionDetails extends Component {
           onChange={this.onQuestionAnswerChange}
           value={this.state.answer}
         />
-        <Button color='danger' onClick={this.onCancel}>Cancel</Button>
+        <Button onClick={this.onSubmitAnswer}>提交</Button>
+        <Button color='danger' onClick={this.onCancel}>返回</Button>
       </div>
     )
   }

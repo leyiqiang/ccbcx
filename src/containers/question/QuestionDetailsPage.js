@@ -16,6 +16,7 @@ import QuestionDetails from '../../components/question/QuestionDetails'
     errorMessage,
     successMessage,
     redirectToQuestionList,
+    submitAnswer,
   } = questionStore
   const { isQuestionInfoLoading } = loadingStore
   return {
@@ -23,6 +24,7 @@ import QuestionDetails from '../../components/question/QuestionDetails'
     question,
     errorMessage,
     successMessage,
+    submitAnswer,
     redirectToQuestionList,
     isQuestionInfoLoading,
   }
@@ -39,6 +41,7 @@ class QuestionDetailsPage extends Component {
     successMessage: PropTypes.string,
     question: PropTypes.object,
     getQuestion: PropTypes.func.isRequired,
+    submitAnswer: PropTypes.func.isRequired,
     isQuestionInfoLoading: PropTypes.bool.isRequired,
     redirectToQuestionList: PropTypes.func.isRequired,
   }
@@ -55,6 +58,7 @@ class QuestionDetailsPage extends Component {
       redirectToQuestionList,
       errorMessage,
       successMessage,
+      submitAnswer,
     } = this.props
     const QuestionWithLoading = WithLoading(QuestionDetails)
     return (
@@ -66,6 +70,7 @@ class QuestionDetailsPage extends Component {
           successMessage={successMessage}
           isLoading={isQuestionInfoLoading}
           redirectToQuestionList={redirectToQuestionList}
+          submitAnswer={submitAnswer}
           {...question}
         />
       </div>
