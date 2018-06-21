@@ -56,13 +56,19 @@ class QuestionMap extends Component {
       gridItems.push(rowItems)
       rowItems = []
     }
-    return (
-      <div>
-        {_.map(gridItems, row => _.map(row, (item) => {
-          return item
-        }))}
-      </div>
-    )
+    if (_.isNil(questionList) || questionList.length <= 0) {
+      return (
+        <div>Nothing here.</div>
+      )
+    } else {
+      return (
+        <div>
+          {_.map(gridItems, row => _.map(row, (item) => {
+            return item
+          }))}
+        </div>
+      )
+    }
   }
 }
 

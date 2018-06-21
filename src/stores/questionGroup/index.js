@@ -29,6 +29,7 @@ class QuestionGroupStore {
 
   @action clearQuestionGroupList() {
     self.questionGroup = null
+    self.questionList = null
   }
   getGroupByType(type) {
     const group = _.find(self.questionGroup, (g) => {
