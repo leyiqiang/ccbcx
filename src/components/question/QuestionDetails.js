@@ -20,7 +20,6 @@ class QuestionDetails extends Component {
     super(props)
     this.state = {
       answer: '',
-      questionContent: this.props.questionContent,
     }
     this.onQuestionAnswerChange = this.onQuestionAnswerChange.bind(this)
     this.onSubmitAnswer = this.onSubmitAnswer.bind(this)
@@ -31,6 +30,9 @@ class QuestionDetails extends Component {
   static propTypes = {
     questionNumber: PropTypes.string,
     questionContent: PropTypes.string,
+    hint1: PropTypes.string,
+    hint2: PropTypes.string,
+    hint3: PropTypes.string,
     redirectToQuestionList: PropTypes.func.isRequired,
     submitAnswer: PropTypes.func.isRequired,
     progress: PropTypes.object,
@@ -62,18 +64,22 @@ class QuestionDetails extends Component {
       const answerHistory = _.join(progress.answerHistory, ', ')
       return(<div>
         {completeString}
-        <p>answer history: {answerHistory}</p>
+        {answerHistory && <div>
+          <Label for='answer history'>answer history:&nbsp;</Label>
+          {answerHistory}
+        </div>}
       </div>)
     }
   }
 
   render() {
+    const { questionContent, hint1, hint2, hint3 } = this.props
     return(
       <div>
         <Label for='questionGroupName'>题目内容:</Label>
         <div className='border' onClick={this.focus}>
           <ReactQuill
-            value={this.state.questionContent}
+            value={questionContent}
             modules={modules}
             readOnly={true}
           />
@@ -85,6 +91,15 @@ class QuestionDetails extends Component {
           onChange={this.onQuestionAnswerChange}
           value={this.state.answer}
         />
+        {hint1 && <div>
+          <Label for='hint1'>hint1:&nbsp;</Label>{hint1}
+        </div>}
+        {hint2 && <div>
+          <Label for='hint2'>hint2:&nbsp;</Label>{hint2}
+        </div>}
+        {hint3 && <div>
+          <Label for='hint3'>hint3:&nbsp;</Label>{hint3}
+        </div>}
         {this.renderProgress()}
         <Button onClick={this.onSubmitAnswer}>提交</Button>
         <Button color='danger' onClick={this.onCancel}>返回</Button>

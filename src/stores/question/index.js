@@ -48,7 +48,8 @@ class QuestionStore {
   @observable async getProgress({ questionNumber }) {
     try {
       const res = await getProgress({ questionNumber })
-      self.progress = res.data
+      const { progress } = res.data
+      self.progress = progress
     } catch (err) {
       self.errorMessage = getErrorMessage(err)
       self.successMessage = null
