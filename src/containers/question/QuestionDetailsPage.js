@@ -69,15 +69,17 @@ class QuestionDetailsPage extends Component {
       <div>
         <AlertMessage bsStyle='danger' message={this.props.errorMessage}/>
         <AlertMessage bsStyle='success' message={this.props.successMessage}/>
-        <QuestionWithLoading
-          errorMessage={errorMessage}
-          successMessage={successMessage}
-          isLoading={isQuestionInfoLoading}
-          redirectToQuestionList={redirectToQuestionList}
-          submitAnswer={submitAnswer}
-          progress={progress}
-          {...question}
-        />
+        {question &&
+          <QuestionWithLoading
+            errorMessage={errorMessage}
+            successMessage={successMessage}
+            isLoading={isQuestionInfoLoading}
+            redirectToQuestionList={redirectToQuestionList}
+            submitAnswer={submitAnswer}
+            progress={progress}
+            {...question}
+          />
+        }
       </div>
     )
   }

@@ -28,6 +28,8 @@ class QuestionStore {
     } catch (err) {
       self.errorMessage = getErrorMessage(err)
       self.successMessage = null
+      self.question = null
+      self.progress = null
     }
     loadingStore.isQuestionInfoLoading = false
   }

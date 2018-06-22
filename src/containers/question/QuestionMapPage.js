@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {inject, observer, PropTypes as MobxPropTypes} from 'mobx-react/index'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
 import QuestionMap from '../../components/question/QuestionMap'
 import AlertMessage from '../../components/AlertMessage'
 import WithLoading from '../../components/WithLoading'

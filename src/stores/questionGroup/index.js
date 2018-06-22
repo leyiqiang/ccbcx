@@ -56,7 +56,7 @@ class QuestionGroupStore {
       })
       if (!_.isNil(nextReleaseTime)) {
         const dateFormat = 'YYYY年MM月DD日 HH:mm:ss'
-        self.nextReleaseTime = moment.utc(nextReleaseTime).local().format(dateFormat)
+        self.nextReleaseTime = moment(nextReleaseTime).local().format(dateFormat)
       }
       self.questionGroup = questionGroupWithLocale
     } catch (err) {
