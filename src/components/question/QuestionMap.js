@@ -58,7 +58,7 @@ class QuestionMap extends Component {
     }
     if (_.isNil(questionList) || questionList.length <= 0) {
       return (
-        <div>Nothing here.</div>
+        <div>这里什么都没有.</div>
       )
     } else {
       return (

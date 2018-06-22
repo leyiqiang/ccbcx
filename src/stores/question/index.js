@@ -35,6 +35,10 @@ class QuestionStore {
   @observable async submitAnswer({ questionNumber, answer}) {
     self.errorMessage = null
     self.successMessage = null
+    if(answer === '') {
+      self.errorMessage = '答案不能为空'
+      return
+    }
     try {
       const res = await submitAnswer({ questionNumber, answer})
       self.successMessage = res.data.message
@@ -47,9 +51,12 @@ class QuestionStore {
 
   @observable async getProgress({ questionNumber }) {
     try {
+      self.progress = null
       const res = await getProgress({ questionNumber })
-      const { progress } = res.data
-      self.progress = progress
+      if (res.data !== '') {
+        const progress = res.data
+        self.progress = progress
+      }
     } catch (err) {
       self.errorMessage = getErrorMessage(err)
       self.successMessage = null

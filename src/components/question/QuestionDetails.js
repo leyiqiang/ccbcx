@@ -56,16 +56,11 @@ class QuestionDetails extends Component {
 
   renderProgress() {
     const {progress} = this.props
-    let completeString
     if(!_.isNil(progress)) {
-      if(!_.isNil(progress.completeTime)) {
-        completeString = <p>You already completed this question</p>
-      }
       const answerHistory = _.join(progress.answerHistory, ', ')
       return(<div>
-        {completeString}
         {answerHistory && <div>
-          <Label for='answer history'>answer history:&nbsp;</Label>
+          <Label for='answer history'>解答历史:&nbsp;</Label>
           {answerHistory}
         </div>}
       </div>)
@@ -73,7 +68,11 @@ class QuestionDetails extends Component {
   }
 
   render() {
-    const { questionContent, hint1, hint2, hint3 } = this.props
+    const { questionContent, hint1, hint2, hint3, progress } = this.props
+    let completeString = null
+    if(!_.isNil(progress) && !_.isNil(progress.completeTime)) {
+      completeString = <p>你已经完成该题了</p>
+    }
     return(
       <div>
         <Label for='questionGroupName'>题目内容:</Label>
@@ -92,17 +91,18 @@ class QuestionDetails extends Component {
           value={this.state.answer}
         />
         {hint1 && <div>
-          <Label for='hint1'>hint1:&nbsp;</Label>{hint1}
+          <Label for='hint1'>提示1:&nbsp;</Label>{hint1}
         </div>}
         {hint2 && <div>
-          <Label for='hint2'>hint2:&nbsp;</Label>{hint2}
+          <Label for='hint2'>提示2:&nbsp;</Label>{hint2}
         </div>}
         {hint3 && <div>
-          <Label for='hint3'>hint3:&nbsp;</Label>{hint3}
+          <Label for='hint3'>提示3:&nbsp;</Label>{hint3}
         </div>}
         {this.renderProgress()}
-        <Button onClick={this.onSubmitAnswer}>提交</Button>
+        <Button onClick={this.onSubmitAnswer} disabled={!_.isNil(completeString)}>提交</Button>
         <Button color='danger' onClick={this.onCancel}>返回</Button>
+        {completeString}
       </div>
     )
   }
