@@ -6,6 +6,8 @@ import {
   joinGroup,
   leaveGroup,
   deleteGroup } from 'src/api/group'
+
+import loadingStore  from '../loading'
 import _ from 'lodash'
 
 class GroupStore {
@@ -28,6 +30,7 @@ class GroupStore {
 
   @action async getGroupInfo() {
     self.clearGroupInfo()
+    loadingStore.isGroupInfoLoading = true
     try {
       self.errorMessage = null
       const res = await getGroupInfo()
@@ -39,11 +42,12 @@ class GroupStore {
         self.invitationCode = invitationCode
         self.memberList = memberList
       }
+      loadingStore.isGroupInfoLoading = false
     } catch (err) {
       self.clearGroupInfo()
       self.errorMessage = getErrorMessage(err)
+      loadingStore.isGroupInfoLoading = false
     }
-
 
   }
 

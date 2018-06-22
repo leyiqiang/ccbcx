@@ -2,18 +2,32 @@ import React, { Component } from 'react'
 import { observer, inject, PropTypes as MobxPropTypes } from 'mobx-react'
 import PropTypes from 'prop-types'
 import { Jumbotron } from 'reactstrap'
-import _ from 'lodash'
 import UserProfile from 'src/components/user/UserProfile'
-import GroupProfile from 'src/components/group/GroupProfile'
-import GroupSubmitForm from 'src/components/group/GroupSubmitForm'
-import {joinGroup} from '../../api/group'
+import AlertMessage from '../../components/AlertMessage'
 
 @inject(stores => {
-  const { sessionStore, loadingStore } = stores
+  const { sessionStore, passwordStore, loadingStore } = stores
   const { userInfo } = sessionStore
-  // const { isUserProfileLoading } = loadingStore
+  const{
+    changePassword,
+    password,
+    setPassword,
+    confirmPassword,
+    setConfirmPassword,
+    successMessage,
+    errorMessage,
+    resetForm,
+  } = passwordStore
   return {
     userInfo,
+    resetForm,
+    changePassword,
+    setPassword,
+    password,
+    setConfirmPassword,
+    confirmPassword,
+    successMessage,
+    errorMessage,
   }
 })
 @observer
@@ -22,18 +36,46 @@ class UserProfilePage extends Component {
     super(props)
   }
 
+  componentWillMount() {
+    this.props.resetForm()
+  }
+
   static propTypes = {
     userInfo: PropTypes.object.isRequired,
+    changePassword: PropTypes.func.isRequired,
+    setPassword: PropTypes.func.isRequired,
+    password: PropTypes.string,
+    confirmPassword: PropTypes.string,
+    setConfirmPassword: PropTypes.func.isRequired,
+    resetForm: PropTypes.func.isRequired,
+    errorMessage: PropTypes.string,
+    successMessage: PropTypes.string,
   }
 
   render() {
-    const { userInfo } = this.props
+    const {
+      userInfo,
+      changePassword,
+      setPassword,
+      password,
+      confirmPassword,
+      setConfirmPassword } = this.props
     const { userName, nickName } = userInfo
     return (
       <div>
         <Jumbotron>
+          <AlertMessage bsStyle='danger' message={this.props.errorMessage}/>
+          <AlertMessage bsStyle='success' message={this.props.successMessage}/>
           <h3>个人信息</h3>
-          <UserProfile userName={userName} nickName={nickName}/>
+          <UserProfile
+            userName={userName}
+            nickName={nickName}
+            password={password}
+            confirmPassword={confirmPassword}
+            setPassword={setPassword}
+            setConfirmPassword={setConfirmPassword}
+            changePassword={changePassword}
+          />
         </Jumbotron>
       </div>
     )

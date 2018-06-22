@@ -6,6 +6,8 @@ const SIGN_IN = AUTH_API + '/signIn'
 
 const SIGN_UP = AUTH_API + '/signUp'
 
+const CHANGE_PASSWORD = '/api/password' + '/change'
+
 export const signIn = async function({ userName, password }) {
   return await axios.post(SIGN_IN, {
     userName,
@@ -19,4 +21,8 @@ export const signUp = async function({ userName, nickName, password }) {
     nickName,
     password,
   })
+}
+
+export const changePassword = async function({ password }) {
+  return await axios.post(CHANGE_PASSWORD, {password})
 }

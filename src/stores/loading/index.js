@@ -8,6 +8,7 @@ class LoadingStore {
   @observable isQuestionGroupLoading = true;
   @observable isQuestionListLoading = true;
   @observable isQuestionInfoLoading = true;
+  @observable isGroupInfoLoading = true;
   constructor () {
   }
 }

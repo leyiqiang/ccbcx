@@ -6,6 +6,7 @@ import loadingStore from './loading'
 import groupStore from './group'
 import questionGroupStore from './questionGroup'
 import questionStore from './question'
+import passwordStore from './password'
 
 const stores = {
   routingStore,
@@ -16,6 +17,7 @@ const stores = {
   groupStore,
   questionGroupStore,
   questionStore,
+  passwordStore,
 }
 
 export default stores

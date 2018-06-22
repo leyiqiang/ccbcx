@@ -21,7 +21,7 @@ import GroupSubmitForm from 'src/components/group/GroupSubmitForm'
     deleteGroup,
     errorMessage,
   } = groupStore
-  // const { isUserProfileLoading } = loadingStore
+  const { isGroupInfoLoading } = loadingStore
   return {
     groupName,
     getGroupInfo,
@@ -33,6 +33,7 @@ import GroupSubmitForm from 'src/components/group/GroupSubmitForm'
     leaveGroup,
     deleteGroup,
     errorMessage,
+    isGroupInfoLoading,
   }
 })
 @observer
@@ -54,6 +55,7 @@ class GroupProfilePage extends Component {
     errorMessage: PropTypes.string,
     leaveGroup: PropTypes.func.isRequired,
     deleteGroup: PropTypes.func.isRequired,
+    isGroupInfoLoading: PropTypes.bool.isRequired,
   }
 
   renderErrorMessage() {
@@ -82,7 +84,11 @@ class GroupProfilePage extends Component {
       leaveGroup,
       deleteGroup,
       errorMessage,
+      isGroupInfoLoading,
     } = this.props
+    if (isGroupInfoLoading) {
+      return <h3>Loading...</h3>
+    }
     if (_.isNil(groupName)) {
       return (
         <GroupSubmitForm
