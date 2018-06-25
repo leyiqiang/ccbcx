@@ -4,7 +4,7 @@ import { withRouter } from 'react-router'
 import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import { SIGN_IN, SIGN_UP, USER, GROUP, QUESTION }  from 'src/data/route'
+import {SIGN_IN, SIGN_UP, USER, GROUP, QUESTION, OFFICE} from 'src/data/route'
 import SignInPage from './SignInPage'
 import SignUpPage from './SignUpPage'
 import InfoCard from 'src/components/InfoCard'
@@ -13,6 +13,7 @@ import UserRoutePage from './user/UserRoutePage'
 import Footer from '../components/Footer'
 import GroupRoutePage from './group/GroupRoutePage'
 import QuestionRoutePage from './question/QuestionRoutePage'
+import OfficeRoutePage from './office/OfficeRoutePage'
 
 @withRouter
 @inject(stores => {
@@ -64,6 +65,7 @@ class RoutePage extends Component {
             <Route path={USER} component={UserRoutePage} />
             <Route path={GROUP} component={GroupRoutePage} />
             <Route path={QUESTION} component={QuestionRoutePage} />
+            <Route path={OFFICE} component={OfficeRoutePage} />
             <Route path={'*'} component={() => <Redirect to={QUESTION}/> } />
           </Switch>
           <Footer/>

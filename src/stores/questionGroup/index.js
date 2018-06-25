@@ -5,7 +5,11 @@ import {getQuestionGroup} from 'src/api/questionGroup'
 import {getQuestionList} from 'src/api/question'
 import _ from 'lodash'
 import moment from 'moment'
-import {PARAM_QUESTION_ID, QUESTION_DETAILS} from 'src/data/route/index'
+import {
+  OFFICE_QUESTION_DETAILS,
+  PARAM_QUESTION_ID,
+  QUESTION_DETAILS,
+} from 'src/data/route/index'
 import {buildParamURI} from '../../util/index'
 import routing from '../routing'
 
@@ -85,6 +89,15 @@ class QuestionGroupStore {
   @action redirectToSettings({ questionNumber }) {
     let redirectedURI = buildParamURI({
       originalURI: QUESTION_DETAILS,
+      paramName: PARAM_QUESTION_ID,
+      substitutedValue: questionNumber,
+    })
+    routing.history.push(redirectedURI)
+  }
+
+  @action redirectToOfficeQuestionSettings({questionNumber}) {
+    let redirectedURI = buildParamURI({
+      originalURI: OFFICE_QUESTION_DETAILS,
       paramName: PARAM_QUESTION_ID,
       substitutedValue: questionNumber,
     })

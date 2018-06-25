@@ -4,7 +4,7 @@ import {getErrorMessage} from 'src/util'
 import {getQuestion, submitAnswer, getProgress} from 'src/api/question'
 import routing from '../routing'
 import _ from 'lodash'
-import { QUESTION_LIST} from '../../data/route'
+import {OFFICE_LIST, QUESTION_LIST} from '../../data/route'
 // import { setXAccessToken } from 'src/util'
 
 class QuestionStore {
@@ -63,6 +63,9 @@ class QuestionStore {
       self.errorMessage = getErrorMessage(err)
       self.successMessage = null
     }
+  }
+  @observable redirectToOfficeQuestionList() {
+    routing.history.push(OFFICE_LIST)
   }
 
   @observable redirectToQuestionList() {
