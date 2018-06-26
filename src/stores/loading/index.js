@@ -11,6 +11,7 @@ class LoadingStore {
   @observable isGroupInfoLoading = true;
   @observable isOfficeQuestionListLoading = true;
   @observable isOfficeQuestionLoading = true;
+  @observable isNewsListLoading = true;
   constructor () {
   }
 }

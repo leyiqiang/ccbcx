@@ -18,3 +18,5 @@ export const QUESTION_DETAILS = QUESTION + '/question/' + PARAM_QUESTION_ID
 export const OFFICE = '/office'
 export const OFFICE_LIST = OFFICE + '/list'
 export const OFFICE_QUESTION_DETAILS = OFFICE + '/' + PARAM_QUESTION_ID
+
+export const NEWS = '/news'
