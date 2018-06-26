@@ -26,7 +26,10 @@ class LatestNews extends Component {
   render() {
     if (this.state.show) {
       return (
-        <Alert onDismiss={this.handleDismiss}>{this.props.latestNews}</Alert>
+        <Alert onDismiss={this.handleDismiss}>
+          <b>Latest News:&nbsp;</b>
+          {this.props.latestNews}
+        </Alert>
       )
     } else {
       return (null)
