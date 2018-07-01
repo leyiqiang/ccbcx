@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { observer, inject } from 'mobx-react'
+import { observer } from 'mobx-react'
 import {
   Collapse,
   Navbar,
@@ -9,9 +9,7 @@ import {
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
-import { ROOT, USER, GROUP } from 'src/data/route/index'
-import {QUESTION} from '../data/route/index';
-// import _ from 'lodash'
+import {USER, GROUP, QUESTION, OFFICE, NEWS} from 'src/data/route'
 
 @observer
 class NavBar extends Component {
@@ -55,7 +53,12 @@ class NavBar extends Component {
               </Link>
             </Nav>
             <Nav navbar>
-              <Link to={ROOT}>
+              <Link to={OFFICE}>
+                <Button>META</Button>
+              </Link>
+            </Nav>
+            <Nav navbar>
+              <Link to={NEWS}>
                 <Button>官方消息</Button>
               </Link>
             </Nav>

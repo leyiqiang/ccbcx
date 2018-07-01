@@ -7,6 +7,7 @@ import groupStore from './group'
 import questionGroupStore from './questionGroup'
 import questionStore from './question'
 import passwordStore from './password'
+import newsStore from './news'
 
 const stores = {
   routingStore,
@@ -18,6 +19,7 @@ const stores = {
   questionGroupStore,
   questionStore,
   passwordStore,
+  newsStore,
 }
 
 export default stores

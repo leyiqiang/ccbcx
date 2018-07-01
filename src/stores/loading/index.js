@@ -9,6 +9,9 @@ class LoadingStore {
   @observable isQuestionListLoading = true;
   @observable isQuestionInfoLoading = true;
   @observable isGroupInfoLoading = true;
+  @observable isOfficeQuestionListLoading = true;
+  @observable isOfficeQuestionLoading = true;
+  @observable isNewsListLoading = true;
   constructor () {
   }
 }

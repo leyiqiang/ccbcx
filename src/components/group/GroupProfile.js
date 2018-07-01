@@ -33,7 +33,7 @@ class GroupProfile extends Component {
       <div>
         <p>队名: {groupName}</p>
         <p>联系方式: {groupContact}</p>
-        <p>成员: {_.join(memberList, ', ')}</p>
+        <p>成员: {_.join(memberList, ', ')} [{memberList.length}/5]</p>
         {invitationCode && <p>队伍邀请码: {invitationCode}</p>}
         <h5>(注: 队伍最多5人, 组员输入邀请码即可加入)</h5>
         {invitationCode ?

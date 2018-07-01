@@ -55,7 +55,7 @@ class QuestionMapPage extends Component {
     const { isQuestionListLoading, nextReleaseTime, questionList, redirectToSettings } = this.props
     const QuestionMapWithLoading = WithLoading(QuestionMap)
     return (
-      <div className='container'>
+      <div>
         <AlertMessage bsStyle='danger' message={this.props.errorMessage}/>
         <AlertMessage bsStyle='success' message={this.props.successMessage}/>
         <QuestionMapWithLoading
