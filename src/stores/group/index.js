@@ -56,7 +56,7 @@ class GroupStore {
     if (self.validate({ groupName, groupContact })) {
       try {
         await createGroup({
-          groupName,
+          groupName: groupName.trim(),
           groupContact,
         })
         await self.getGroupInfo()

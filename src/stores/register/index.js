@@ -42,7 +42,7 @@ class RegisterStore {
     if (self.validate()) {
       try {
         const res = await signUp({
-          userName: self.userName,
+          userName: self.userName.trim(),
           nickName: self.nickName,
           password: self.password,
         })
