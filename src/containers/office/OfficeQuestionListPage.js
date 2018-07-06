@@ -72,6 +72,11 @@ class OfficeQuestionListPage extends Component {
     } = this.props
     const metaQuestionList = _.filter(questionList, (q) => {return q.isMeta === true})
     const orderedList = _.orderBy(metaQuestionList, q => q.questionNumber)
+    if (_.isNil(orderedList) || orderedList.length <= 0) {
+      return (
+        <div>这里什么都没有.</div>
+      )
+    }
     const questionListView = _.map(orderedList, (q) => {
       const onRedirectToOfficeQuestionSettings = () => {
         redirectToOfficeQuestionSettings({questionNumber: q.questionNumber})
@@ -99,7 +104,6 @@ class OfficeQuestionListPage extends Component {
     return (
       <div>
         {this.renderErrorMessage()}
-        <h3>Office</h3>
         {this.renderQuestionList()}
       </div>
     )

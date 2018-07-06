@@ -54,7 +54,7 @@ class NavBar extends Component {
             </Nav>
             <Nav navbar>
               <Link to={OFFICE}>
-                <Button>META</Button>
+                <Button>探长办公室</Button>
               </Link>
             </Nav>
             <Nav navbar>
